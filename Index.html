@@ -174,7 +174,41 @@ body {
   </div>
 </div>
 
-<button class="link-button" id="goBtn">EMPLOYEE INFORMATION</button>
+<button class="link-button" id="goBtn">
+  <img src="https://example.com/icon.png" alt="Icon" />
+  <span>EMPLOYEE INFORMATION</span>
+</button>
+
+<style>
+  #goBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 8px;
+    background: #10b981;
+    color: #012;
+    font-weight: 800;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  }
+  #goBtn:hover {
+    filter: brightness(1.1);
+  }
+  #goBtn img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  #goBtn span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #012;
+  }
+</style>
 
 <div class="buttons-grid">
   <button class="extra-btn" id="btn1"><img src="YOUR_BTN1_IMAGE_URL" alt="Button1" />බටන් 1</button>
