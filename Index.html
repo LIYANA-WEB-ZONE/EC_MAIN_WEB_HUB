@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DTS Sul — ELECTRICITY UNIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg,#071021 0%, #081224 60%);
+  color: #e6eef6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 150vh;
+  padding-top: 40px;
+}
+
+.bell-wrap { 
+  position: relative; 
+  margin-top: -30px; 
+  transition: margin-top 0.3s ease; 
+  align-self: flex-start; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.bell { 
+  width: 52px; 
+  height: 52px; 
+  border-radius: 12px; 
+  background: rgba(255,255,255,0.03); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  backdrop-filter: blur(6px); 
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6); 
+  cursor: pointer; 
+  border: 1px solid rgba(255,255,255,0.03); 
+  position: relative; 
+  z-index: 5; 
+}
+
+.badge { 
+  position: absolute; 
+  right: -6px; 
+  top: -6px; 
+  background: #10b981; 
+  color: #012; 
+  font-weight: 700; 
+  font-size: 12px; 
+  padding: 3px 6px; 
+  border-radius: 999px; 
+  box-shadow: 0 6px 14px rgba(16,185,129,0.12); 
+  z-index: 6; 
+}
+
+.logo { width: 48px; height: 48px; margin-bottom: 80px; object-fit: contain; }
+
+.title-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 100px; }
+
+.title { font-size: 42px; font-weight: 800; text-align: center; letter-spacing: 1.5px; color: #10b981; line-height: 1.1; text-shadow: 0 6px 18px rgba(16,185,129,0.12); margin: 0; }
+
+.subtitle { margin-top: 8px; font-size: 20px; font-weight: 600; text-align: center; color: #cfeee1; opacity: 0.95; letter-spacing: 0.8px; }
+
+.video-card { width: 90%; max-width: 880px; background: rgba(255,255,255,0.02); border-radius: 16px; padding: 12px; display: flex; justify-content: center; align-items: center; margin-top: 18px; }
+
+.video-wrap { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; }
+
+.video-wrap iframe { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; }
+
+.link-button {
+  margin-top: 18px;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 12px;
+  background: #10b981;
+  color: #012;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+.link-button:hover { 
+  background: #34d399; 
+}
+
+.buttons-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+  justify-items: center;
+}
+
+#btn1 { background-color: #7c2d12; }
+#btn2 { background-color: #1e3a8a; }
+#btn3 { background-color: #064e3b; }
+#btn4 { background-color: #5b21b6; }
+
+.extra-btn {
+  width: 200px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.extra-btn img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 24px; }
+.extra-btn:hover { filter: brightness(1.1); }
+
+.footer-text {
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cfeee1;
+  line-height: 1.8; /* පෙලි අතර ඉඩ වැඩි */
+}
+
+@media (max-width:480px) {
+  .title { font-size: 30px; }
+  .subtitle { font-size: 16px; }
+  .bell-wrap { margin-left: 12px; margin-top: -20px; }
+  .logo { width: 36px; height: 36px; margin-bottom: 60px; }
+  .title-wrap { margin-top: 60px; }
+  .buttons-grid { grid-template-columns: repeat(2, 1fr); grid-gap: 12px; }
+  .extra-btn { width: 140px; font-size: 14px; padding: 12px; }
+  .extra-btn img { width: 48px; height: 48px; margin-bottom: 20px; }
+}
+
+#floatingWrapper { position: fixed; right: 20px; top: 20px; width: 80px; height: 80px; z-index: 50; pointer-events: none; }
+#floatingImg { width: 100%; height: 100%; object-fit: contain; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<div id="floatingWrapper">
+  <img src="YOUR_FLOATING_IMAGE_URL_HERE" id="floatingImg" alt="Floating Logo" />
+</div>
+
+<div class="bell-wrap">
+  <div class="bell" id="bellBtn" title="Notifications" aria-label="Notification Bell">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 17H9a3 3 0 0 1-3-3v-3a6 6 0 1 1 12 0v3a3 3 0 0 1-3 3Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <div class="badge" id="notifBadge"></div>
+  </div>
+</div>
+
+<div class="title-wrap">
+  <img src="YOUR_IMAGE_URL_HERE" alt="Logo Image" class="logo" />
+  <h1 class="title">ELECTRICITY UNIT</h1>
+  <div class="subtitle">TEACHING HOSPITAL - POLONNARUWA</div>
+</div>
+
+<div class="video-card">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/SLyTF95xh7g?autoplay=1&mute=1&rel=0&playsinline=1&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<button class="link-button" id="goBtn">වෙන වෙබ් අඩවියට යන්න</button>
+
+<div class="buttons-grid">
+  <button class="extra-btn" id="btn1"><img src="YOUR_BTN1_IMAGE_URL" alt="Button1" />බටන් 1</button>
+  <button class="extra-btn" id="btn2"><img src="YOUR_BTN2_IMAGE_URL" alt="Button2" />බටන් 2</button>
+  <button class="extra-btn" id="btn3"><img src="YOUR_BTN3_IMAGE_URL" alt="Button3" />බටන් 3</button>
+  <button class="extra-btn" id="btn4"><img src="YOUR_BTN4_IMAGE_URL" alt="Button4" />බටන් 4</button>
+</div>
+
+<div class="footer-text">
+  LIYANA WEB ZONE LANKA (PVT) LTD<br />
+  WEB BROADCASTING IN WDSP<br />
+  JALAN METRO PUDU, 55100 KUALA LUMPUR<br />
+  MALAYSIA<br />
+  2026
+</div>
+
+<script>
+const bell = document.getElementById('bellBtn');
+const badge = document.getElementById('notifBadge');
+
+let notifications = ["මම ගෙදර ගියා", "මම පාසල් ගියා"];
+let currentIndex = 0;
+
+badge.textContent = notifications.length;
+
+bell.addEventListener('click', () => {
+  if (currentIndex < notifications.length) {
+    alert(notifications[currentIndex]);
+    currentIndex++;
+    const left = notifications.length - currentIndex;
+
+    if (left <= 0) {
+      badge.style.display = "none";
+    } else {
+      badge.style.display = "flex";
+      badge.textContent = left;
+    }
+  }
+});
+
+document.getElementById('goBtn').addEventListener('click', () => {
+  window.location.href = 'https://example.com';
+});
+
+const btnLinks = {
+  btn1: 'https://example.com/page1',
+  btn2: 'https://example.com/page2',
+  btn3: 'https://example.com/page3',
+  btn4: 'https://example.com/page4'
+};
+
+Object.keys(btnLinks).forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    window.location.href = btnLinks[id];
+  });
+});
+
+const wrapper = document.getElementById('floatingWrapper');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY || window.pageYOffset;
+  wrapper.style.top = 20 - scrollY * 0.5 + 'px';
+});
+</script>
+
+</body>
+</html>
