@@ -215,7 +215,7 @@ body {
   <button class="extra-btn" id="btn1"><img src="Button Icon 01.png" alt="Button1" />APPLICATION</button>
   <button class="extra-btn" id="btn2"><img src="YOUR_BTN2_IMAGE_URL" alt="Button2" />බටන් 2</button>
   <button class="extra-btn" id="btn3"><img src="YOUR_BTN3_IMAGE_URL" alt="Button3" />බටන් 3</button>
-  <button class="extra-btn" id="btn4"><img src="YOUR_BTN4_IMAGE_URL" alt="Button4" />E - LIBRARY</button>
+  <button class="extra-btn" id="btn4"><img src="Button Icon 04.png" alt="Button4" />E - LIBRARY</button>
 </div>
 
 <div class="footer-text">
@@ -230,7 +230,7 @@ body {
 const bell = document.getElementById('bellBtn');
 const badge = document.getElementById('notifBadge');
 
-let notifications = ["WELLCOME TO EC UNIT POLONNARUWA", "මම පාසල් ගියා"];
+let notifications = ["WELLCOME TO EC UNIT POLONNARUWA", ""];
 let currentIndex = 0;
 
 badge.textContent = notifications.length;
@@ -273,6 +273,74 @@ window.addEventListener('scroll', () => {
   wrapper.style.top = 20 - scrollY * 0.5 + 'px';
 });
 </script>
+***************
+  <canvas id="snow"></canvas>
+
+<script>
+const canvas = document.getElementById('snow');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+function resize() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const snowflakes = [];
+function createSnow() {
+  const x = Math.random() * width;
+  const y = Math.random() * height;
+  const radius = Math.random() * 3 + 1;
+  const speed = Math.random() * 1 + 0.5;
+  snowflakes.push({ x, y, radius, speed });
+}
+
+function drawSnow() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  snowflakes.forEach((flake) => {
+    ctx.moveTo(flake.x, flake.y);
+    ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+  });
+  ctx.fill();
+  moveSnow();
+}
+
+function moveSnow() {
+  snowflakes.forEach((flake) => {
+    flake.y += flake.speed;
+    flake.x += Math.sin(flake.y * 0.01);
+
+    if (flake.y > height) {
+      flake.y = -5;
+      flake.x = Math.random() * width;
+    }
+  });
+}
+
+setInterval(createSnow, 100);
+function animate() {
+  drawSnow();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+<style>
+#snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* click disable */
+  z-index: 9999; /* වහලේම පේන්න */
+}
+</style>
+***************
 
 </body>
 </html>
