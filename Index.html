@@ -277,6 +277,30 @@ window.addEventListener('scroll', () => {
   
 
   
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>White Snow Effect</title>
+
+<style>
+  body{
+    margin:0;
+    background:#000;
+    height:100vh;
+    overflow:hidden;
+  }
+  canvas.snow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    display:block;
+  }
+</style>
+
+</head>
+<body>
+
 <!-- ❄ Snow Canvas -->
 <canvas class="snow"></canvas>
 
@@ -342,6 +366,9 @@ window.addEventListener('scroll', () => {
 
 })();
 </script>
+
+</body>
+</html>
 
 
   
