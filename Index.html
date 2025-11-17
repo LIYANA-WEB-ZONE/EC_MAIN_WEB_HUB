@@ -231,7 +231,7 @@ body {
 const bell = document.getElementById('bellBtn');
 const badge = document.getElementById('notifBadge');
 
-let notifications = ["WELLCOME TO EC UNIT POLONNARUWA", ""];
+let notifications = ["WELLCOME TO EC UNIT POLONNARUWA"];
 let currentIndex = 0;
 
 badge.textContent = notifications.length;
@@ -274,34 +274,9 @@ window.addEventListener('scroll', () => {
   wrapper.style.top = 20 - scrollY * 0.5 + 'px';
 });
 </script>
+  
 
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>White Snow Effect</title>
-
-<style>
-  body{
-    margin:0;
-    background:#000;
-    height:100vh;
-    overflow:hidden;
-  }
-  canvas.snow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    display:block;
-  }
-</style>
-
-</head>
-<body>
-
+  
 <!-- ❄ Snow Canvas -->
 <canvas class="snow"></canvas>
 
@@ -369,8 +344,6 @@ window.addEventListener('scroll', () => {
 </script>
 
 
-
   
-
 </body>
 </html>
