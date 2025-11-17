@@ -5,19 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ELECTRICITY UNIT</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  
-  
-  <style>
-  canvas.snow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    display:block;
-  }
-</style>
-
-
   
 <style>
 body {
@@ -291,75 +278,95 @@ window.addEventListener('scroll', () => {
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>White Snow Effect</title>
 
+<style>
+  body{
+    margin:0;
+    background:#000;
+    height:100vh;
+    overflow:hidden;
+  }
+  canvas.snow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    display:block;
+  }
+</style>
 
+</head>
+<body>
 
-  
-  <script>
-  (function(){
-    const canvas = document.querySelector('.snow');
-    const ctx = canvas.getContext('2d');
-    let W = 0, H = 0, flakes = [], rafId = null;
+<!-- ❄ Snow Canvas -->
+<canvas class="snow"></canvas>
 
-    function rand(min, max){ return Math.random() * (max - min) + min; }
+<script>
+(function(){
 
-    function resize(){
-      W = canvas.width = innerWidth;
-      H = canvas.height = innerHeight;
-      const target = Math.floor((W * H) / 70000) + 60;
-      while(flakes.length < target) flakes.push(new Flake());
-      while(flakes.length > target) flakes.pop();
-    }
-    addEventListener('resize', resize);
+  const canvas = document.querySelector(".snow");
+  const ctx = canvas.getContext("2d");
 
-    function Flake(){
-      this.reset = function(){
-        this.x = rand(0, W);
-        this.y = rand(-H, 0);
-        this.r = rand(1.5, 4.8);
-        this.speed = rand(0.4, 1.6);
-        this.wind = rand(-0.6, 0.6);
-        this.tilt = rand(0, Math.PI*2);
-        this.tiltSpeed = rand(0.01, 0.03);
-      };
-      this.update = function(){
-        this.tilt += this.tiltSpeed;
-        this.x += Math.sin(this.tilt) * 0.6 + this.wind;
-        this.y += this.speed + this.r * 0.03;
-        if(this.y > H + 10 || this.x < -20 || this.x > W + 20) this.reset();
-      };
-      this.draw = function(ctx){
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fill();
-      };
+  let W = canvas.width = innerWidth;
+  let H = canvas.height = innerHeight;
+
+  // light snow amount
+  const FLAKE_COUNT = 35;
+
+  const flakes = [];
+
+  function rand(min, max){ return Math.random() * (max - min) + min; }
+
+  class Flake {
+    constructor() {
       this.reset();
     }
-
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-
-      // 🟡 change color here if needed
-      ctx.fillStyle = "rgba(255,215,0,0.9)";
-
-      flakes.forEach(f => { f.update(); f.draw(ctx); });
-      rafId = requestAnimationFrame(draw);
+    reset() {
+      this.x = rand(0, W);
+      this.y = rand(-H, 0);
+      this.r = rand(1.5, 4.8);
+      this.speed = rand(0.4, 1.5);
+      this.wind = rand(-0.4, 0.4);
     }
+    update() {
+      this.y += this.speed;
+      this.x += this.wind;
+      if (this.y > H || this.x < -10 || this.x > W+10) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
 
-    function start(){ if(!rafId) draw(); }
-    function stop(){ if(rafId){ cancelAnimationFrame(rafId); rafId = null; } }
+  for(let i=0;i<FLAKE_COUNT;i++){
+    flakes.push(new Flake());
+  }
 
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.hidden) stop(); else start();
-    });
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = "white"; // ❄ white snow
+    for(const f of flakes){
+      f.update();
+      f.draw(ctx);
+    }
+    requestAnimationFrame(draw);
+  }
 
-    resize();
-    start();
-  })();
+  window.addEventListener("resize", ()=>{
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+  });
+
+  draw();
+
+})();
 </script>
-
-
-
 
 
 
