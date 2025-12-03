@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ELECTRICITY UNIT</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg,#071021 0%, #081224 60%);
+  color: #e6eef6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 150vh;
+  padding-top: 40px;
+}
+
+.bell-wrap { 
+  position: relative; 
+  margin-top: -30px; 
+  transition: margin-top 0.3s ease; 
+  align-self: flex-start; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.bell { 
+  width: 52px; 
+  height: 52px; 
+  border-radius: 12px; 
+  background: rgba(255,255,255,0.03); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  backdrop-filter: blur(6px); 
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6); 
+  cursor: pointer; 
+  border: 1px solid rgba(255,255,255,0.03); 
+  position: relative; 
+  z-index: 5; 
+}
+
+/* 🔴 වෙනස් කළ කොටස - දැන් රතු පාටයි */
+.badge { 
+  position: absolute; 
+  right: -6px; 
+  top: -6px; 
+  background: #ef4444; /* රතු පැහැය */
+  color: #fff; 
+  font-weight: 700; 
+  font-size: 12px; 
+  padding: 3px 6px; 
+  border-radius: 999px; 
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.4); /* රතු සෙවනැල්ල */
+  z-index: 6; 
+}
+
+.logo { width: 96px; height: 96px; margin-bottom: 60px; object-fit: contain; }
+
+.title-wrap { display: flex; flex-direction: column; align-items: center; margin-top: 100px; }
+
+.title { font-size: 42px; font-weight: 800; text-align: center; letter-spacing: 1.5px; color: #10b981; line-height: 1.1; text-shadow: 0 6px 18px rgba(16,185,129,0.12); margin: 0; }
+
+.subtitle { margin-top: 8px; font-size: 20px; font-weight: 600; text-align: center; color: #cfeee1; opacity: 0.95; letter-spacing: 0.8px; }
+
+.video-card { width: 90%; max-width: 480px; background: rgba(255,255,255,0.02); border-radius: 16px; padding: 12px; display: flex; justify-content: center; align-items: center; margin-top: 18px; }
+
+.video-wrap { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-radius: 10px; }
+
+.video-wrap iframe { position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; }
+
+.link-button {
+  margin-top: 40px;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 12px;
+  background: #10b981;
+  color: #012;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+.link-button:hover { 
+  background: #34d399; 
+}
+
+.buttons-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
+  justify-items: center;
+}
+
+#btn1 { background-color: #7c2d12; }
+#btn2 { background-color: #1e3a8a; }
+#btn3 { background-color: #064e3b; }
+#btn4 { background-color: #5b21b6; }
+
+.extra-btn {
+  width: 200px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.extra-btn img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 24px; }
+.extra-btn:hover { filter: brightness(1.1); }
+
+.footer-text {
+  margin-top: 90px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #cfeee1;
+  line-height: 1.8; /* පෙලි අතර ඉඩ වැඩි */
+}
+
+@media (max-width:480px) {
+  .title { font-size: 30px; }
+  .subtitle { font-size: 16px; }
+  .bell-wrap { margin-left: 12px; margin-top: -20px; }
+  .logo { width: 96px; height: 96px; margin-bottom: 40px; }
+  .title-wrap { margin-top: 60px; }
+  .buttons-grid { grid-template-columns: repeat(2, 1fr); grid-gap: 12px; }
+  .extra-btn { width: 140px; font-size: 14px; padding: 12px; }
+  .extra-btn img { width: 48px; height: 48px; margin-bottom: 20px; }
+}
+
+/* 📦 Floating Wrapper CSS (වටකුරු බව ඉවත් කර ඇත) */
+#floatingWrapper { 
+    position: fixed; 
+    right: 20px; 
+    top: 20px; 
+    width: 80px; 
+    height: 80px; 
+    z-index: 50; 
+    pointer-events: none; 
+    /* border-radius: 50%; - ඉවත් කරන ලදි */
+    /* overflow: hidden; - ඉවත් කරන ලදි */
+}
+
+/* 🎥 වීඩියෝ/GIF සඳහා CSS */
+#floatingContent { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    animation: float 3s ease-in-out infinite; 
+}
+
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
+
+/* 🔔 යාවත්කාලීන කරන ලද CSS - Modal දෙකටම පොදුයි */
+#bellNotificationModal, #welcomeModal { 
+  display: none; 
+  position: fixed;
+  z-index: 100; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #081224; 
+  background: linear-gradient(180deg, #071021 0%, #081224 100%);
+  margin: auto;
+  padding: 20px; 
+  border-radius: 14px; 
+  width: 90%;
+  max-width: 320px; 
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#bellNotificationModal.show .modal-content, #welcomeModal.show .modal-content { 
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-header {
+  color: #10b981;
+  font-size: 20px; 
+  font-weight: 800;
+  margin-bottom: 10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-message {
+  color: #cfeee1;
+  font-size: 16px; 
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 20px; 
+}
+
+.modal-close-btn {
+  background: #10b981;
+  color: #012;
+  border: none;
+  padding: 8px 20px; 
+  border-radius: 6px; 
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px; 
+  transition: background 0.3s;
+}
+
+.modal-close-btn:hover {
+  background: #34d399;
+}
+</style>
+</head>
+<body>
+  
+<div id="floatingWrapper">
+  <img 
+    src="AW.gif" 
+    id="floatingContent" 
+    alt="Floating Icon" 
+  />
+
+  </div>
+
+<div class="bell-wrap">
+  <div class="bell" id="bellBtn" title="Notifications" aria-label="Notification Bell">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 17H9a3 3 0 0 1-3-3v-3a6 6 0 1 1 12 0v3a3 3 0 0 1-3 3Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <div class="badge" id="notifBadge"></div>
+  </div>
+</div>
+
+<div class="title-wrap">
+  <img src="Logo Icon 02.jpg" alt="Logo Image" class="logo" />
+  <h1 class="title">ELECTRICITY UNIT</h1>
+  <div class="subtitle">TEACHING HOSPITAL - POLONNARUWA</div>
+</div>
+
+<div class="video-card">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/k-W2Bkz_Rno?autoplay=1&mute=1&rel=0&playsinline=1&controls=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<button class="link-button" id="goBtn">
+  <img src="Main Button Icon.png" alt="Icon" />
+  <span>EMPLOYEE INFORMATION</span>
+</button>
+
+<style>
+  #goBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 8px;
+    width:300px;
+    background: #10b981;
+    color: #012;
+    font-weight: 800;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  }
+  #goBtn:hover {
+    filter: brightness(1.1);
+  }
+  #goBtn img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  #goBtn span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #012;
+  }
+</style>
+
+<div class="buttons-grid">
+  <button class="extra-btn" id="btn1"><img src="Button Icon 01.png" alt="Button1" />APPLICATION</button>
+  <button class="extra-btn" id="btn2"><img src="YOUR_BTN2_IMAGE_URL" alt="Button2" />බටන් 2</button>
+  <button class="extra-btn" id="btn3"><img src="YOUR_BTN3_IMAGE_URL" alt="Button3" />බටන් 3</button>
+  <button class="extra-btn" id="btn4"><img src="Button Icon 04.png" alt="Button4" />E - LIBRARY</button>
+</div>
+
+<div class="footer-text">
+  LIYANA WEB ZONE LANKA (PVT) LTD<br />
+  WEB BROADCASTING IN WDSP<br />
+  JALAN METRO PUDU, 55100 KUALA LUMPUR<br />
+  MALAYSIA<br />
+  2026
+</div>
+
+
+<div id="bellNotificationModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 8V12" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 16H12.01" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      දැනුම්දීම (Notification)
+    </div>
+    <p class="modal-message" id="bellModalMessage"></p>
+    <button class="modal-close-btn" id="closeBellModal">OK</button>
+  </div>
+</div>
+
+
+<div id="welcomeModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 8V12" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 16H12.01" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        විශේෂ පණිවිඩය
+      </div>
+      <p class="modal-message">
+        **අද දින විශේෂ නිවේදනය:**<br>
+        2025 දෙසැම්බර් මස 4 වනදා සියලුම අලුත්වැඩියා කටයුතු පෙ.ව. 10.00 සිට අත්හිටුවනු ලැබේ.
+      </p>
+      <button class="modal-close-btn" style="background: #ef4444;" id="closeWelcomeModal">CLOSE</button>
+    </div>
+  </div>
+
+
+<script>
+// 🔔 Bell Notification Variables
+const bell = document.getElementById('bellBtn');
+const badge = document.getElementById('notifBadge');
+const bellModal = document.getElementById('bellNotificationModal'); 
+const bellModalMessage = document.getElementById('bellModalMessage'); 
+const closeBellModalBtn = document.getElementById('closeBellModal'); 
+
+let notifications = ["WELLCOME TO EC UNIT POLONNARUWA", "මෙහි තවත් දැනුම්දීමක් එකතු කරන්න.", "තුන්වන දැනුම්දීම මෙහි ඇත."]; 
+let currentIndex = 0;
+
+// 🌟 Welcome Pop-up Variables
+const welcomeModal = document.getElementById('welcomeModal');
+const closeWelcomeModalBtn = document.getElementById('closeWelcomeModal');
+
+
+// --- 🔔 Bell Notification Functions ---
+
+function updateBadge() {
+    const left = notifications.length - currentIndex;
+    if (left <= 0) {
+        badge.style.display = "none";
+    } else {
+        badge.style.display = "flex";
+        badge.textContent = left;
+    }
+}
+
+// Bell Modal එක පෙන්වන function එක
+function showBellModal(message) {
+    bellModalMessage.textContent = message;
+    bellModal.style.display = "flex";
+    setTimeout(() => {
+      bellModal.classList.add('show');
+    }, 10);
+}
+
+// Bell Modal එක වසන function එක
+function hideBellModal() {
+    bellModal.classList.remove('show');
+    setTimeout(() => {
+      bellModal.style.display = "none";
+    }, 300); 
+}
+
+bell.addEventListener('click', () => {
+  if (currentIndex < notifications.length) {
+    showBellModal(notifications[currentIndex]);
+    currentIndex++;
+    updateBadge(); // දැනුම්දීම පෙන්වූ පසු badge එක update කරන්න
+  } else {
+    showBellModal("සියලු දැනුම්දීම් කියවා ඇත."); 
+  }
+});
+
+// Bell Modal එක වසන්න බොත්තම
+closeBellModalBtn.addEventListener('click', hideBellModal);
+
+// Bell Modal එකෙන් පිටත ක්ලික් කළ විට වැසීමට
+window.addEventListener('click', (event) => {
+  if (event.target === bellModal) {
+    hideBellModal();
+  }
+});
+
+updateBadge(); // Load වූ වහාම badge එක update කරන්න
+
+
+// --- 🌟 Welcome Pop-up Functions & Autoload ---
+
+// Welcome Modal එක පෙන්වන function එක
+function showWelcomeModal() {
+    welcomeModal.style.display = "flex";
+    setTimeout(() => {
+      welcomeModal.classList.add('show');
+    }, 10);
+}
+
+// Welcome Modal එක වසන function එක
+function hideWelcomeModal() {
+    welcomeModal.classList.remove('show');
+    setTimeout(() => {
+      welcomeModal.style.display = "none";
+    }, 300); 
+}
+
+closeWelcomeModalBtn.addEventListener('click', hideWelcomeModal);
+
+// Welcome Modal එකෙන් පිටත ක්ලික් කළ විට වැසීමට
+window.addEventListener('click', (event) => {
+  if (event.target === welcomeModal) {
+    hideWelcomeModal();
+  }
+});
+
+// 🔴 ආරම්භයේදීම Welcome Pop-up එක පෙන්වීමට පාලනය
+const shouldShowWelcomeOnLoad = true; 
+
+if (shouldShowWelcomeOnLoad) {
+    // Pop-up එක පෙන්වීම
+    showWelcomeModal();
+}
+// 🔴 අවසන්
+
+
+// --- Other Button Functionality ---
+
+document.getElementById('goBtn').addEventListener('click', () => {
+  window.location.href = 'https://liyana-web-zone.github.io/EC_EMPLOYEE_INFORMATION/Index.html';
+});
+
+const btnLinks = {
+  btn1: 'https://example.com/page1',
+  btn2: 'https://example.com/page2',
+  btn3: 'https://example.com/page3',
+  btn4: 'https://example.com/page4'
+};
+
+Object.keys(btnLinks).forEach(id => {
+  document.getElementById(id).addEventListener('click', () => {
+    window.location.href = btnLinks[id];
+  });
+});
+
+const wrapper = document.getElementById('floatingWrapper');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY || window.pageYOffset;
+  wrapper.style.top = 20 - scrollY * 0.5 + 'px';
+});
+</script>
+
+  
+</body>
+</html>
